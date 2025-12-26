@@ -80,9 +80,8 @@ export class ProductController {
       const product = await knex<ProductRepository>("products")
         .where({ id })
         .first();
-      if (!product) {
-        throw new AppError("Product not found");
-      }
+
+      if (!product) throw new AppError("Product not found");
 
       await knex("products").delete().where({ id });
 
